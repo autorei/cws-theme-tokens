@@ -45,6 +45,7 @@
             key: "input-tokens-title",
           }, 'Tokens'),
           e('textarea', {
+            spellcheck: false,
             className: 'editor-textarea',
             key: 'input-tokens-textarea',
             value: this.props.tokensValue,
@@ -60,6 +61,7 @@
             key: "input-settings-title",
           }, 'Settings'),
           e('textarea', {
+            spellcheck: false,
             className: 'editor-textarea',
             key: 'input-settings-textarea',
             value: this.props.settingsValue,
@@ -75,6 +77,7 @@
             key: "output-tokens-title",
           }, 'CSS Output Vars'),
           e('textarea', {
+            spellcheck: false,
             className: 'editor-textarea',
             key: 'output-tokens-textarea',
             readOnly: true,
