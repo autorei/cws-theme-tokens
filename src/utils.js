@@ -15,10 +15,10 @@ export const formatValue = (value, options = {}) => {
 
   const colorHexa = Color(value).hex()
   const originalColor = Color(colorHexa)
-  const colorContrastLight = options.colorContrastLight || '#FFFFFF'
-  const colorContrastDark = options.colorContrastDark || '#000000'
-  const colorsNumber = options.colorsNumber || 9
-  const colorStep = options.colorStep || 0.1
+  const colorContrastLight = options.colorContrastLight
+  const colorContrastDark = options.colorContrastDark
+  const colorsNumber = options.colorsNumber
+  const colorStep = options.colorStep
   let formatedColors = []
   let contrastColors = []
 
