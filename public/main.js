@@ -1,3 +1,9 @@
+/**
+ * This script is just a workaround to test cws-theme-tokens on a html file
+ * and a lot of anti-patterns could be found here.
+ * So I really doens't reccomend to use this script to study patterns to be shipped to production.
+ */
+
 (() => {
   const initialRawTokens = {
     'sizeIconXxs': '16px',
@@ -6,7 +12,14 @@
     'sizeIconMd': '32px',
     'sizeIconLg': '40px',
     'sizeIconXl': '48px',
-    'colorPrimary': '#E45E69',
+    'colorPrimary': '#008CDF',
+    'colorSecondary': '#303030',
+    'colorNeutral': '#B6B6B6',
+    'colorNeutral': '#B6B6B6',
+    'colorError': '#EA0808',
+    'colorError': '#EA0808',
+    'colorAlert': '#E1A100',
+    'colorSuccess': '#07B45D',
   }
 
   const initialSettings = {
@@ -30,7 +43,7 @@
           e('h2', {
             className: 'editor-item-title',
             key: "input-tokens-title",
-          }, 'Input Tokens'),
+          }, 'Tokens'),
           e('textarea', {
             className: 'editor-textarea',
             key: 'input-tokens-textarea',
@@ -47,7 +60,7 @@
           e('h2', {
             className: 'editor-item-title',
             key: "input-settings-title",
-          }, 'Input Settings'),
+          }, 'Settings'),
           e('textarea', {
             className: 'editor-textarea',
             key: 'input-settings-textarea',
@@ -100,19 +113,40 @@
   class Examples extends React.Component {
     render () {
       const formatedTokens = this.props.formatedTokens
-      const colors = Object.keys(formatedTokens)
+      const colorsKeys = Object.keys(formatedTokens)
         .filter((key) => key.toLowerCase().includes('color'))
         .filter((key) => !key.toLowerCase().includes('contrast'))
 
+      let colorsGroupFlat = []
+      let colorsGroupList = []
+      let allColors = []
+
+      colorsKeys.forEach((key) => {
+        const color = formatedTokens[key]
+        allColors.push({
+          key: key,
+          value: color,
+          slug: key.replace(/[0-9]/g, ''),
+        })
+      })
+
+      colorsGroupFlat = _.groupBy(allColors, 'slug')
+
+      Object.keys(colorsGroupFlat).forEach((groupKey) => {
+        const colorsList = colorsGroupFlat[groupKey]
+        colorsGroupList.push(colorsList)
+      })
+
       // only return example for colors vars
-      return e('div', {
+      return colorsGroupList.map((colors, index) => e('div', {
+        key: index,
         className: 'examples-list'
-      }, colors.map((key) => e(ExampleItem, {
-        key: key,
-        label: key,
-        color: formatedTokens[key],
-        colorContrast: formatedTokens[key + '-contrast']
-      })))
+      }, colors.map((color) => e(ExampleItem, {
+        key: color.key,
+        label: color.key,
+        color: color.value,
+        colorContrast: formatedTokens[color.key + '-contrast']
+      }))))
     }
   }
 
