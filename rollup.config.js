@@ -13,7 +13,7 @@ const rollupConfig = () => {
   if (production) {
     return [
       {
-        input: 'src/index.js',
+        input: 'src/main.js',
         output: {
           file: pkg.main,
           format: 'cjs'
@@ -39,7 +39,7 @@ const rollupConfig = () => {
         ]
       },
       {
-        input: 'src/index.js',
+        input: 'src/main.js',
         output: {
           file: pkg.browser,
           format: 'umd',
@@ -55,7 +55,7 @@ const rollupConfig = () => {
         ]
       },
       {
-        input: 'src/index.js',
+        input: 'src/main.js',
         output: {
           file: pkg.browser.replace(/\.js$/, '.min.js'),
           format: 'umd',
@@ -72,7 +72,7 @@ const rollupConfig = () => {
         ]
       },
       {
-        input: 'src/index.js',
+        input: 'src/main.js',
         output: {
           file: pkg.module,
           format: 'es'
@@ -90,7 +90,7 @@ const rollupConfig = () => {
   }
   else {
     return {
-      input: 'src/index.js',
+      input: 'src/main.js',
       output: {
         file: 'public/cws-theme-tokens.js',
         format: 'umd',

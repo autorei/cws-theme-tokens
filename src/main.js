@@ -7,4 +7,6 @@ export default function (tokens, options = {}) {
   Object.keys(formatedTokens).forEach(key => {
     $element.style.setProperty(key, formatedTokens[key])
   })
+
+  return formatedTokens
 }
