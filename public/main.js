@@ -49,8 +49,6 @@
             key: 'input-tokens-textarea',
             value: this.props.tokensValue,
             onChange: this.props.onTokensChange,
-            cols: 50,
-            rows: 10,
           })
         ]),
         e('div', {
@@ -66,8 +64,6 @@
             key: 'input-settings-textarea',
             value: this.props.settingsValue,
             onChange: this.props.onSettingsChange,
-            cols: 50,
-            rows: 10,
           })
         ]),
         e('div', {
