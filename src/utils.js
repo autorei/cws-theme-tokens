@@ -1,7 +1,7 @@
-import { kebabCase } from 'lodash'
-import { isArray } from 'util'
 import isColor from 'is-color'
 import Color from 'color'
+
+const kebabCase = (str) => str.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/[\s_]+/g, '-').toLowerCase()
 
 export const formatKey = (tokenKey) => {
   const formatedTokenKey = `--${kebabCase(tokenKey)}`
@@ -49,7 +49,7 @@ export const formatTokens = (tokens, options = {}) => {
     const value = tokens[tokenKey]
     let formatedValue = formatValue(value, options)
 
-    if (isArray(formatedValue)) {
+    if (Array.isArray(formatedValue)) {
       formatedValue.forEach((valueObject) => {
         formatedTokens[`${formatedKey}-${valueObject.suffix}`] = valueObject.value
       })
