@@ -85,6 +85,22 @@ const rollupConfig = () => {
             exclude: 'node_modules/**'
           })
         ]
+      },
+      {
+        input: 'src/main.js',
+        output: {
+          file: 'public/cws-theme-tokens.js',
+          format: 'umd',
+          name: 'cwsThemeTokens'
+        },
+        plugins: [
+          resolve(),
+          commonjs(),
+          json(),
+          babel({
+            exclude: 'node_modules/**'
+          }),
+        ]
       }
     ]
   }
