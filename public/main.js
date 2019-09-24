@@ -9,7 +9,14 @@
     'colorPrimary': '#E45E69',
   }
 
-  const initialFormatedTokens = window.cwsThemeTokens(initialRawTokens)
+  const initialSettings = {
+    colorContrastLight: '#FFFFFF',
+    colorContrastDark: '#000000',
+    colorsNumber: 9,
+    colorStep: 0.1,
+  }
+
+  const initialFormatedTokens = window.cwsThemeTokens(initialRawTokens, initialSettings)
 
   const e = React.createElement
 
@@ -18,32 +25,52 @@
       return e('div', { className: 'editor' }, [
         e('div', {
           className: 'editor-item',
-          key: 'textarea',
+          key: 'input-tokens',
         }, [
           e('h2', {
-            className: 'editor-item-title'
+            className: 'editor-item-title',
+            key: "input-tokens-title",
           }, 'Input Tokens'),
           e('textarea', {
             className: 'editor-textarea',
-            key: 'textarea',
-            value: this.props.value,
-            onChange: this.props.onChange,
+            key: 'input-tokens-textarea',
+            value: this.props.tokensValue,
+            onChange: this.props.onTokensChange,
             cols: 50,
             rows: 10,
           })
         ]),
         e('div', {
           className: 'editor-item',
-          key: 'tokens',
+          key: 'input-settings',
         }, [
           e('h2', {
-            className: 'editor-item-title'
+            className: 'editor-item-title',
+            key: "input-settings-title",
+          }, 'Input Settings'),
+          e('textarea', {
+            className: 'editor-textarea',
+            key: 'input-settings-textarea',
+            value: this.props.settingsValue,
+            onChange: this.props.onSettingsChange,
+            cols: 50,
+            rows: 10,
+          })
+        ]),
+        e('div', {
+          className: 'editor-item',
+          key: 'output-tokens',
+        }, [
+          e('h2', {
+            className: 'editor-item-title',
+            key: "output-tokens-title",
           }, 'CSS Output Vars'),
           e('textarea', {
-            className: 'editor-tokens',
-            key: 'tokens',
+            className: 'editor-textarea',
+            key: 'output-tokens-textarea',
             readOnly: true,
-          }, JSON.stringify(this.props.formatedTokens, undefined, 2))
+            value: JSON.stringify(this.props.formatedTokens, undefined, 2)
+          })
         ])
       ])
     }
@@ -62,7 +89,10 @@
             background: color,
             color: colorContrast,
           }
-        }, e('span', { className: 'example-item-color-label' }, label))
+        }, [
+            e('span', { className: 'example-item-color-label', key: 'label' }, label),
+            e('span', { className: 'example-item-color-value', key: 'color' }, color)
+        ])
       }
     }
   }
@@ -90,12 +120,15 @@
     state = {
       rawTokens: initialRawTokens,
       formatedTokens: initialFormatedTokens,
-      value: JSON.stringify(initialRawTokens, undefined, 2),
+      tokensValue: JSON.stringify(initialRawTokens, undefined, 2),
+      rawSettings: initialSettings,
+      settingsValue: JSON.stringify(initialSettings, undefined, 2),
     }
 
     handleTokensChange(e) {
       const value = e.target.value
-      let formatedValue = value
+      const formatedSettings = this.state.formatedSettings
+      let formatedTokensValue = value
       let isInvalid = false
       let rawTokens = this.state.rawTokens
       let formatedTokens = this.state.formatedTokens
@@ -106,38 +139,69 @@
       }
       catch {
         isInvalid = true
-        console.log('Invalid JSON entry')
+        console.log('Invalid Tokens JSON entry')
       }
 
       if (parsedRawTokens) {
+        rawTokens = parsedRawTokens
         document.documentElement.style = ''
-        formatedTokens = window.cwsThemeTokens(parsedRawTokens)
-        formatedValue = JSON.stringify(parsedRawTokens, undefined, 2)
-      }
-      else {
-
+        formatedTokens = window.cwsThemeTokens(parsedRawTokens, formatedSettings)
+        formatedTokensValue = JSON.stringify(parsedRawTokens, undefined, 2)
       }
 
       this.setState({
         isInvalid: isInvalid,
-        rawTokens: rawTokens,
         formatedTokens: formatedTokens,
-        value: formatedValue
+        rawTokens: rawTokens,
+        tokensValue: formatedTokensValue
+      })
+    }
+
+    handleSettingsChange (e) {
+      const value = e.target.value
+      const rawTokens = this.state.rawTokens
+      let isInvalid = false
+      let formatedSettingsValue = value
+      let rawSettings = this.state.rawSettings
+      let formatedTokens = this.state.formatedTokens
+      let parsedRawSettings
+
+      try {
+        parsedRawSettings = JSON.parse(value)
+      }
+      catch {
+        isInvalid = true
+        console.log('Invalid Settings JSON entry')
+      }
+
+      if (parsedRawSettings) {
+        rawSettings = parsedRawSettings
+        document.documentElement.style = ''
+        formatedTokens = window.cwsThemeTokens(rawTokens, parsedRawSettings)
+        formatedSettingsValue = JSON.stringify(parsedRawSettings, undefined, 2)
+      }
+
+      this.setState({
+        isInvalid: isInvalid,
+        formatedTokens: formatedTokens,
+        settingsValue: formatedSettingsValue,
       })
     }
 
     render () {
-      const value = this.state.value
-      const rawTokens = this.state.rawTokens
+      const tokensValue = this.state.tokensValue
       const formatedTokens = this.state.formatedTokens
       const isInvalid = this.state.isInvalid
+      const settingsValue = this.state.settingsValue
 
       return e('div', null, [
         e(Editor, {
           key: 'editor',
-          value: value,
+          tokensValue: tokensValue,
+          settingsValue: settingsValue,
           formatedTokens: formatedTokens,
-          onChange: this.handleTokensChange.bind(this),
+          onSettingsChange: this.handleSettingsChange.bind(this),
+          onTokensChange: this.handleTokensChange.bind(this),
           isInvalid: isInvalid,
         }),
         e(Examples, {
