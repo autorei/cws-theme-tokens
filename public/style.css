@@ -7,7 +7,7 @@ body {
 .editor {
   display: flex;
   flex-wrap: wrap;
-  background-color: var(--color-primary-900);
+  background-color: var(--color-primary-900, #000);
 }
 
 .editor-item {
@@ -15,11 +15,11 @@ body {
   flex-direction: column;
   flex: 1;
   padding: 1rem;
-  background-color: var(--color-primary-900);
+  background-color: var(--color-primary-900, #000);
 }
 
 .editor-item-title {
-  color: var(--color-primary-900-contrast);
+  color: var(--color-primary-900-contrast, #fff);
   margin-bottom: 0.5rem;
 }
 
@@ -32,9 +32,9 @@ body {
   font-family: 'Roboto Mono', monospace;
   font-size: 1rem;
   line-height: 1.5rem;
-  background-color: var(--color-primary-900);
-  color: var(--color-primary-900-contrast);
-  border: 1px solid var(--color-primary-900-contrast);
+  background-color: var(--color-primary-900, #000);
+  color: var(--color-primary-900-contrast, #fff);
+  border: 1px solid var(--color-primary-900-contrast, #fff);
   max-height: 50vh;
   overflow-y: auto;
 }
@@ -54,6 +54,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 3px;
 }
 
 .example-item-color-label {

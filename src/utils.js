@@ -23,7 +23,7 @@ export const formatValue = (value, options = {}) => {
   let contrastColors = []
 
   for (let index = 1; index <= colorsNumber; index++) {
-    const lightenValue = (5 - index) * colorStep
+    const lightenValue = (Math.round(colorsNumber / 2) - index) * colorStep
 
     formatedColors.push({
       suffix: index * 100,

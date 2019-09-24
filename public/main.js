@@ -100,14 +100,14 @@
   class Examples extends React.Component {
     render () {
       const formatedTokens = this.props.formatedTokens
+      const colors = Object.keys(formatedTokens)
+        .filter((key) => key.toLowerCase().includes('color'))
+        .filter((key) => !key.toLowerCase().includes('contrast'))
 
       // only return example for colors vars
       return e('div', {
         className: 'examples-list'
-      }, Object.keys(formatedTokens)
-        .filter((key) => key.toLowerCase().includes('color'))
-        .filter((key) => !key.toLowerCase().includes('contrast'))
-        .map((key) => e(ExampleItem, {
+      }, colors.map((key) => e(ExampleItem, {
         key: key,
         label: key,
         color: formatedTokens[key],
