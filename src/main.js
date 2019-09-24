@@ -4,7 +4,7 @@ export default function (tokens, options = {}) {
   const joinedOptions = {
     colorContrastLight: '#FFFFFF',
     colorContrastDark: '#000000',
-    colorsNumber: 9,
+    colorAmount: 9,
     colorStep: 0.1,
     ...options
   }

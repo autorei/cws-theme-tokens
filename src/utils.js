@@ -17,13 +17,13 @@ export const formatValue = (value, options = {}) => {
   const originalColor = Color(colorHexa)
   const colorContrastLight = options.colorContrastLight
   const colorContrastDark = options.colorContrastDark
-  const colorsNumber = options.colorsNumber
+  const colorAmount = options.colorAmount
   const colorStep = options.colorStep
   let formatedColors = []
   let contrastColors = []
 
-  for (let index = 1; index <= colorsNumber; index++) {
-    const lightenValue = (Math.round(colorsNumber / 2) - index) * colorStep
+  for (let index = 1; index <= colorAmount; index++) {
+    const lightenValue = (Math.round(colorAmount / 2) - index) * colorStep
 
     formatedColors.push({
       suffix: index * 100,
