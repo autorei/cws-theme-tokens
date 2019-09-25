@@ -1,14 +1,20 @@
 import isColor from 'is-color'
 import Color from 'color'
 
-const kebabCase = (str) => str.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/[\s_]+/g, '-').toLowerCase()
+const kebabCase = (str) => str.replace(/\-{2}/g, '').replace(/([a-z])([A-Z])/g, '$1-$2').replace(/[\s_]+/g, '-').toLowerCase()
 
 export const formatKey = (tokenKey) => {
   const formatedTokenKey = `--${kebabCase(tokenKey)}`
   return formatedTokenKey
 }
 
-export const formatValue = (value, options = {}) => {
+export const formatValue = (value, options = {
+  colorContrastLight: '#FFFFFF',
+  colorContrastDark: '#000000',
+  colorAmount: 9,
+  colorStep: 0.1,
+}) => {
+
   if (!isColor(value)) {
     return value
   }
@@ -41,7 +47,12 @@ export const formatValue = (value, options = {}) => {
   return formatedColors.concat(contrastColors)
 }
 
-export const formatTokens = (tokens, options = {}) => {
+export const formatTokens = (tokens, options = {
+  colorContrastLight: '#FFFFFF',
+  colorContrastDark: '#000000',
+  colorAmount: 9,
+  colorStep: 0.1,
+}) => {
   let formatedTokens = {}
 
   Object.keys(tokens).forEach((tokenKey) => {
