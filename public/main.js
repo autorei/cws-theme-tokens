@@ -92,14 +92,13 @@
     render () {
       const label = this.props.label
       const color = this.props.color
-      const colorContrast = this.props.colorContrast
 
       if (label.toLowerCase().includes('color')) {
         return e('div', {
           className: 'example-item-color',
           style: {
-            background: color,
-            color: colorContrast,
+            background: `var(${label})`,
+            color: `var(${label}-contrast)`,
           }
         }, [
             e('span', { className: 'example-item-color-label', key: 'label' }, label),
@@ -144,7 +143,6 @@
         key: color.key,
         label: color.key,
         color: color.value,
-        colorContrast: formatedTokens[color.key + '-contrast']
       }))))
     }
   }
