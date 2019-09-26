@@ -1,7 +1,7 @@
 /**
  * This script is just a workaround to test cws-theme-tokens on a html file
  * and a lot of anti-patterns could be found here.
- * So I really doens't reccomend to use this script to study patterns to be shipped to production.
+ * So I really don't recommend to use this script to study patterns to be shipped to production.
  */
 
 (() => {
