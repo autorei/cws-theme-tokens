@@ -1,5 +1,5 @@
 # cws-theme-tokens
-> Theme Tokens handler to be used on cws.digital products
+> Theme Tokens handler used by cws.digital products
 
 This library receive a list of tokens and generate CSS vars for each token and, when it is a color, generate dynamic shades of the color.
 
