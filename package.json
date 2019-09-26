@@ -1,6 +1,6 @@
 {
   "name": "cws-theme-tokens",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "license": "MIT",
   "main": "dist/cws-theme-tokens.cjs.js",
