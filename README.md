@@ -16,7 +16,7 @@ npm install --save cws-theme-tokens
 
 Import
 ```js
-import cwsThemeTokens from 'cws-theme-tokens`
+import cwsThemeTokens from 'cws-theme-tokens'
 ```
 
 ### CDN
@@ -209,7 +209,7 @@ When a value is a valid css color this will be handled to generate dynamic shade
 ```
 
 ### settings
-Settings to generate
+Settings to generate tokens, set CSS vars and handle colors
 
 | Attribute | Description | Type | Default |
 |-------|------|---------|---------|
