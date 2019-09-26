@@ -1,7 +1,9 @@
 # cws-theme-tokens
 > Theme Tokens handler to be used on cws.digital products
 
-This library receive a list of tokens and generate CSS vars.
+This library receive a list of tokens and generate CSS vars for each token and, when it is a color, generate dynamic shades of the color.
+
+Will can test this library [here](https://cws-theme-tokens.netlify.com/)
 
 ## Installing
 
