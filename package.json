@@ -1,6 +1,6 @@
 {
   "name": "cws-theme-tokens",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Theme Tokens handler used by cws.digital products",
   "license": "MIT",
   "main": "dist/cws-theme-tokens.cjs.js",
